@@ -1,0 +1,17 @@
+{
+  "name": "vi-tuyen-17",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Slide thuyet trinh VNR202 - Lich su Dang CSVN - Chuong 2 muc II.1 (1954-1965)",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "next": "15.5.4",
+    "react": "19.1.1",
+    "react-dom": "19.1.1"
+  }
+}

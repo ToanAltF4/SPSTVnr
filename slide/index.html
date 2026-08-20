@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vĩ Tuyến 17</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --ink:#0F0D0C;
+  --ink-2:#191614;
+  --ink-3:#232019;
+  --paper:#DED8C8;
+  --paper-dim:#9E978A;
+  --paper-faint:#6A655C;
+  --red:#C8102E;
+  --red-lo:#8E0B20;
+  --gold:#E3B23C;
+  --line:rgba(222,216,200,.14);
+  --line-hi:rgba(222,216,200,.28);
+  --stage-pad:clamp(28px,4.2vw,84px);
+  --display:"Archivo Black","Arial Black",system-ui,sans-serif;
+  --body:"Lora",Georgia,"Times New Roman",serif;
+  --mono:"IBM Plex Mono",ui-monospace,"Courier New",monospace;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;background:var(--ink);color:var(--paper);
+  font-family:var(--body);font-size:16px;line-height:1.6;
+  overflow:hidden;-webkit-font-smoothing:antialiased;
+}
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:60;
+  background:
+    radial-gradient(120% 90% at 50% 0%,transparent 42%,rgba(0,0,0,.55) 100%),
+    repeating-linear-gradient(0deg,rgba(0,0,0,.22) 0 1px,transparent 1px 3px);
+  opacity:.5;mix-blend-mode:multiply;
+}
+
+/* ── VĨ TUYẾN 17 : thanh tiến độ ─────────────────────────── */
+.parallel{position:fixed;top:0;left:0;right:0;height:3px;background:rgba(222,216,200,.10);z-index:50}
+.parallel i{display:block;height:100%;width:0;background:var(--red);
+  box-shadow:0 0 14px rgba(200,16,46,.85);transition:width .45s cubic-bezier(.2,.7,.2,1)}
+.parallel-label{position:fixed;top:10px;left:var(--stage-pad);z-index:50;
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.34em;color:var(--paper-faint);text-transform:uppercase}
+
+/* ── SÂN KHẤU SLIDE ──────────────────────────────────────── */
+#stage{position:relative;height:100vh;width:100vw}
+.slide{
+  position:absolute;inset:0;display:none;
+  padding:calc(var(--stage-pad) + 24px) var(--stage-pad) calc(var(--stage-pad) + 26px);
+  overflow:hidden;
+}
+.slide.on{display:flex;flex-direction:column;justify-content:center}
+.slide.on>*{animation:rise .55s cubic-bezier(.2,.7,.2,1) both}
+.slide.on>*:nth-child(2){animation-delay:.07s}
+.slide.on>*:nth-child(3){animation-delay:.13s}
+.slide.on>*:nth-child(4){animation-delay:.19s}
+@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){
+  .slide.on>*{animation:none}
+  .parallel i{transition:none}
+}
+.wrap{width:min(1220px,100%);margin:0 auto}
+
+/* ── TYPO ────────────────────────────────────────────────── */
+.eyebrow{
+  font-family:var(--mono);font-size:clamp(9.5px,.72vw,11.5px);font-weight:600;
+  letter-spacing:.32em;text-transform:uppercase;color:var(--red);
+  display:flex;align-items:center;gap:14px;margin:0 0 20px
+}
+.eyebrow::after{content:"";flex:1;height:1px;background:var(--line);max-width:180px}
+.eyebrow.gold{color:var(--gold)}
+h1{font-family:var(--display);font-size:clamp(38px,6.6vw,104px);line-height:.94;
+  letter-spacing:-.022em;margin:0;text-wrap:balance}
+h2{font-family:var(--display);font-size:clamp(26px,3.5vw,54px);line-height:1.04;
+  letter-spacing:-.016em;margin:0 0 22px;text-wrap:balance}
+h3{font-family:var(--display);font-size:clamp(17px,1.55vw,24px);line-height:1.18;
+  margin:0 0 10px;letter-spacing:-.008em}
+p{margin:0 0 15px;max-width:66ch;font-size:clamp(14.5px,1.06vw,18px);color:#CFC9BB}
+.lede{font-size:clamp(16px,1.4vw,23px);line-height:1.5;color:var(--paper);max-width:60ch}
+strong{color:#FFF7E6;font-weight:700}
+em{color:var(--gold);font-style:italic}
+.dim{color:var(--paper-dim)}
+.big-num{font-family:var(--display);font-size:clamp(44px,7vw,104px);line-height:.9;
+  color:var(--red);letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+
+/* ── TRÍCH GIÁO TRÌNH ────────────────────────────────────── */
+.doc{
+  border-left:3px solid var(--red);background:linear-gradient(90deg,rgba(200,16,46,.09),transparent 65%);
+  padding:20px 26px;margin:0 0 20px;max-width:74ch
+}
+.doc q{display:block;font-size:clamp(15px,1.22vw,20.5px);line-height:1.52;color:#EDE7D9;quotes:"“" "”"}
+.doc cite{display:block;margin-top:13px;font-family:var(--mono);font-size:10.5px;
+  letter-spacing:.15em;text-transform:uppercase;color:var(--paper-faint);font-style:normal}
+
+/* ── DANH SÁCH ───────────────────────────────────────────── */
+ul.pts{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:15px;max-width:70ch}
+ul.pts li{position:relative;padding-left:38px;font-size:clamp(14.5px,1.06vw,18px);color:#CFC9BB;line-height:1.52}
+ul.pts li::before{
+  content:counter(n,decimal-leading-zero);counter-increment:n;position:absolute;left:0;top:.16em;
+  font-family:var(--mono);font-size:11px;font-weight:600;color:var(--red);letter-spacing:.06em
+}
+ul.pts{counter-reset:n}
+ul.plain li::before{content:"—";color:var(--red);font-family:var(--body)}
+
+/* ── LƯỚI ────────────────────────────────────────────────── */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,3.4vw,60px);align-items:center}
+.split.wide-l{grid-template-columns:1.25fr 1fr}
+.split.wide-r{grid-template-columns:1fr 1.25fr}
+.cols3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media (max-width:900px){.split,.split.wide-l,.split.wide-r,.cols3{grid-template-columns:1fr}}
+
+.card{background:var(--ink-2);border:1px solid var(--line);padding:22px}
+.card .k{font-family:var(--mono);font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--red);margin-bottom:11px}
+.card p{margin:0;font-size:15px}
+
+/* ── ẢNH / TANG CHỨNG ────────────────────────────────────── */
+figure{margin:0;position:relative}
+figure img{display:block;width:100%;height:100%;object-fit:contain;
+  filter:saturate(.82) contrast(1.06)}
+.frame{background:#080706;border:1px solid var(--line-hi);padding:12px;position:relative}
+.frame::before{
+  content:attr(data-tag);position:absolute;top:-1px;left:-1px;z-index:2;
+  font-family:var(--mono);font-size:9px;font-weight:600;letter-spacing:.22em;
+  background:var(--red);color:#fff;padding:4px 10px
+}
+.frame img{max-height:min(64vh,620px);margin:0 auto}
+.frame.tall img{max-height:min(70vh,700px)}
+figcaption{font-family:var(--mono);font-size:10.5px;line-height:1.55;color:var(--paper-faint);
+  margin-top:11px;letter-spacing:.04em;max-width:56ch}
+figcaption b{color:var(--paper-dim);font-weight:500}
+
+/* ── BẢNG ────────────────────────────────────────────────── */
+.tbl-wrap{overflow-x:auto;max-width:100%}
+table{border-collapse:collapse;width:100%;font-size:clamp(12.5px,.96vw,15.5px)}
+th,td{text-align:left;padding:9px 16px 9px 0;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--mono);font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--paper-faint);font-weight:600;padding-bottom:11px}
+td:first-child{font-family:var(--mono);color:var(--red);white-space:nowrap;font-variant-numeric:tabular-nums;font-size:.92em}
+tr.hi td{color:#FFF7E6}
+tr.hi td:first-child{color:var(--gold)}
+table.cmp td:first-child{color:var(--paper-dim);font-family:var(--body);white-space:normal}
+table.cmp td:nth-child(2){color:#C9928F}
+table.cmp td:nth-child(3){color:#B9D2B4}
+
+/* ── CHÂN SLIDE ──────────────────────────────────────────── */
+.foot{position:fixed;left:var(--stage-pad);right:var(--stage-pad);bottom:16px;z-index:40;
+  display:flex;align-items:center;justify-content:space-between;gap:20px;
+  font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--paper-faint)}
+.who{display:flex;align-items:center;gap:9px}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--red);box-shadow:0 0 9px currentColor}
+.who[data-m="A"] .dot{background:#5B8FB9}
+.who[data-m="B"] .dot{background:#57A773}
+.who[data-m="C"] .dot{background:#D98E32}
+.who[data-m="D"] .dot{background:#C8102E}
+.foot .rt{display:flex;align-items:center;gap:22px}
+#clock{font-variant-numeric:tabular-nums;letter-spacing:.1em}
+#clock.warn{color:var(--gold)}
+#clock.over{color:var(--red)}
+#count{color:var(--paper-dim);font-variant-numeric:tabular-nums}
+
+/* ── OVERVIEW ────────────────────────────────────────────── */
+#ov{position:fixed;inset:0;z-index:70;background:rgba(8,7,6,.97);display:none;
+  overflow-y:auto;padding:64px var(--stage-pad)}
+#ov.on{display:block}
+#ov h4{font-family:var(--mono);font-size:11px;letter-spacing:.3em;text-transform:uppercase;
+  color:var(--paper-faint);margin:0 0 22px}
+.ovg{display:grid;grid-template-columns:repeat(auto-fill,minmax(184px,1fr));gap:12px}
+.ovc{background:var(--ink-2);border:1px solid var(--line);padding:14px;cursor:pointer;
+  text-align:left;color:inherit;font:inherit;transition:border-color .15s,background .15s}
+.ovc:hover,.ovc:focus-visible{border-color:var(--red);background:var(--ink-3);outline:none}
+.ovc .n{font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;color:var(--red);margin-bottom:7px}
+.ovc .t{font-family:var(--display);font-size:12.5px;line-height:1.28}
+.ovc[data-m="A"] .n{color:#5B8FB9}.ovc[data-m="B"] .n{color:#57A773}
+.ovc[data-m="C"] .n{color:#D98E32}.ovc[data-m="D"] .n{color:#C8102E}
+
+/* ── SPEAKER NOTES ───────────────────────────────────────── */
+#notes{position:fixed;left:0;right:0;bottom:0;z-index:65;max-height:44vh;overflow-y:auto;
+  background:#080706;border-top:2px solid var(--red);padding:20px var(--stage-pad) 26px;display:none}
+#notes.on{display:block}
+#notes .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--red);margin-bottom:10px}
+#notes p{font-size:15px;color:#CFC9BB;max-width:96ch;margin:0 0 9px}
+
+/* ── HELP ────────────────────────────────────────────────── */
+#help{position:fixed;right:var(--stage-pad);top:14px;z-index:50;font-family:var(--mono);
+  font-size:9.5px;letter-spacing:.16em;color:var(--paper-faint);text-transform:uppercase}
+kbd{font-family:var(--mono);border:1px solid var(--line-hi);padding:1px 5px;margin:0 1px;font-size:9px}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+</style>
+</head>
+<body>
+
+<div class="parallel"><i id="bar"></i></div>
+<div class="parallel-label">Vĩ tuyến 17</div>
+<div id="help"><kbd>←</kbd><kbd>→</kbd> chuyển · <kbd>O</kbd> mục lục · <kbd>S</kbd> ghi chú · <kbd>T</kbd> hẹn giờ · <kbd>F</kbd> toàn màn</div>
+
+<main id="stage"></main>
+
+<div class="foot">
+  <div class="who" id="who"><span class="dot"></span><span id="whoName"></span></div>
+  <div class="rt"><span id="clock">00:00</span><span id="count"></span></div>
+</div>
+
+<div id="ov" role="dialog" aria-label="Mục lục slide"><h4>Mục lục — 28 slide · 4 thành viên</h4><div class="ovg" id="ovg"></div></div>
+<aside id="notes"><div class="k">Ghi chú người nói</div><div id="notesBody"></div></aside>
+
+<script>
+const IMG = "img/";
+const S = [
+/* ══ A ══════════════════════════════════════════════ */
+{m:"A",id:"1",t:"Vĩ tuyến 17",
+ h:`<div class="wrap">
+  <div class="eyebrow">VNR202 · Lịch sử Đảng Cộng sản Việt Nam · Chương 2 — Mục II.1</div>
+  <h1>VĨ TUYẾN 17<br><span style="color:var(--red)">VÀ MỘT CHIẾN DỊCH</span><br>ĐƯỢC DỰNG LÊN</h1>
+  <p class="lede" style="margin-top:26px">Phân tích chính sách di cư của Mỹ và chính quyền Ngô Đình Diệm sau Hiệp định Genève, trong sự lãnh đạo của Đảng đối với cách mạng hai miền Nam – Bắc <strong>1954 – 1965</strong>.</p>
+ </div>`,
+ n:"Chào cô và các bạn. Nhóm em trình bày Chương 2 mục II.1, trọng tâm là chính sách di cư sau Hiệp định Genève."},
+
+{m:"A",id:"2",t:"Giới tuyến quân sự tạm thời",
+ h:`<div class="wrap split wide-r">
+  <div>
+    <div class="eyebrow">21 · 7 · 1954</div>
+    <h2>Không phải dấu chấm hết.<br>Là điểm khởi đầu.</h2>
+    <div class="doc"><q>Đất nước bị chia làm hai miền, có chế độ chính trị, xã hội khác nhau: miền Bắc được hoàn toàn giải phóng phát triển theo con đường xã hội chủ nghĩa, <strong>miền Nam do chính quyền đối phương quản lý, trở thành thuộc địa kiểu mới của đế quốc Mỹ</strong>.</q><cite>Giáo trình · Chương 2 · Mục II.1 (tr. 180–205)</cite></div>
+    <p><strong>“Thuộc địa kiểu mới”</strong> — thực dân cũ cai trị trực tiếp. Thực dân kiểu mới <em>giấu mặt sau một chính quyền bản xứ</em>: dùng người Việt trị người Việt, dùng viện trợ thay quân chiếm đóng, và dùng <strong>tuyên truyền thay súng đạn</strong> trong giai đoạn đầu.</p>
+  </div>
+  <figure class="frame" data-tag="TL-01"><img src="${IMG}cau-hien-luong.jpg" alt="Cầu Hiền Lương bắc qua sông Bến Hải tại vĩ tuyến 17">
+    <figcaption><b>Cầu Hiền Lương – sông Bến Hải.</b> Giới tuyến quân sự tạm thời tại vĩ tuyến 17 theo Hiệp định Genève.</figcaption></figure>
+ </div>`,
+ n:"Nhấn mạnh khái niệm thuộc địa kiểu mới — đây là chìa khóa của cả bài. Thực dân kiểu mới dùng tuyên truyền thay súng đạn."},
+
+{m:"A",id:"3",t:"Hai miền — hai chiến lược",
+ h:`<div class="wrap">
+  <div class="eyebrow">Bài toán chưa có tiền lệ trong lịch sử dân tộc</div>
+  <h2>Một Đảng, hai chiến lược cách mạng</h2>
+  <div class="cols3" style="margin-bottom:26px">
+    <div class="card"><div class="k">Miền Bắc</div><p>Cách mạng xã hội chủ nghĩa.<br><strong style="color:var(--gold)">Vai trò quyết định nhất</strong></p></div>
+    <div class="card"><div class="k">Miền Nam</div><p>Cách mạng dân tộc dân chủ nhân dân.<br><strong style="color:var(--gold)">Quyết định trực tiếp</strong></p></div>
+    <div class="card" style="border-color:var(--red)"><div class="k">Mục tiêu chung</div><p>Giải phóng miền Nam,<br><strong>hòa bình thống nhất Tổ quốc</strong></p></div>
+  </div>
+  <div class="doc"><q>Hiện nay <strong>đế quốc Mỹ là kẻ thù chính</strong> của nhân dân thế giới, và nó đang trở thành <strong>kẻ thù chính và trực tiếp của nhân dân Đông Dương</strong>, cho nên mọi việc của ta đều nhằm chống đế quốc Mỹ.</q><cite>Hội nghị Trung ương lần thứ 6 · 15–17 · 7 · 1954</cite></div>
+ </div>`,
+ n:"Chú ý: Hội nghị TW 6 họp TRƯỚC khi Hiệp định được ký vài ngày. Đảng đã nhận định đúng kẻ thù mới ngay từ đầu."},
+
+{m:"A",id:"4",t:"Câu hỏi của cả bài",
+ h:`<div class="wrap">
+  <div class="eyebrow">Điều 14(d) · Thời hạn 300 ngày</div>
+  <div class="split" style="align-items:start;margin-bottom:30px">
+    <div><div class="big-num">800.000+</div><p class="dim" style="margin-top:10px;font-size:14px">người rời miền Bắc vào Nam trong 300 ngày. Một số tài liệu ước tính trên 900.000.</p></div>
+    <div><div class="big-num">310.000</div><p class="dim" style="margin-top:10px;font-size:14px">người do riêng Hải quân Hoa Kỳ vận chuyển trong “Chiến dịch Con đường tới Tự do”.</p></div>
+  </div>
+  <h2 style="color:var(--gold);max-width:24ch">Đây là quyền tự do lựa chọn — hay một chiến dịch được tổ chức từ trước?</h2>
+  <p>Nhóm em trả lời bằng ba tầng phân tích: <strong>hiện tượng → thủ đoạn → bản chất</strong>. Và chứng minh bằng chính <em>tài liệu của phía Hoa Kỳ đã được giải mật</em>.</p>
+ </div>`,
+ n:"Đây là slide đặt vấn đề. Đọc chậm câu hỏi lớn, ngừng một nhịp rồi chuyển cho B."},
+
+/* ══ B ══════════════════════════════════════════════ */
+{m:"B",id:"5",t:"Lập trường của giáo trình",
+ h:`<div class="wrap">
+  <div class="eyebrow">Bóc trần thủ đoạn</div>
+  <h2>Giáo trình gọi tên hành vi này là gì?</h2>
+  <div class="doc"><q>Pháp và tay sai đã dùng mọi âm mưu, thủ đoạn để chống phá, làm rối loạn xã hội và mất trật tự an ninh trước khi chúng rút quân, như <strong>kích động, thúc ép đồng bào theo đạo Thiên chúa di cư vào Nam</strong>, phá hoại, di chuyển máy móc nguyên vật liệu trái phép…</q><cite>Giáo trình · Chương 2 · Mục II.1</cite></div>
+  <div class="split" style="margin-top:8px">
+    <div><h3 style="color:var(--red)">“Kích động”</h3><p>Chủ động khơi dậy tâm lý sợ hãi vốn không tự có.</p></div>
+    <div><h3 style="color:var(--red)">“Thúc ép”</h3><p>Và ở đoạn ngay sau, giáo trình gọi thẳng: <strong style="color:var(--gold)">“địch cưỡng ép di cư”</strong>.</p></div>
+  </div>
+ </div>`,
+ n:"Đây là slide neo lập trường. Nhấn mạnh hai động từ của giáo trình: kích động và thúc ép."},
+
+{m:"B",id:"6",t:"Thủ đoạn 1 — Đánh vào đức tin",
+ h:`<div class="wrap split wide-l">
+  <div>
+    <div class="eyebrow">Thủ đoạn 01 — Chiến tranh tâm lý tôn giáo</div>
+    <h2 style="font-size:clamp(30px,4.4vw,62px);line-height:.98">“Chúa đã bỏ<br>miền Bắc”</h2>
+    <p>Nhóm công tác của <strong>Đại tá Edward Lansdale</strong> tung khẩu hiệu nhắm thẳng vào các làng Công giáo: <em>“Đức Mẹ đã vào Nam”</em>, <em>“Chúa đã bỏ miền Bắc”</em>.</p>
+    <p>Thủ đoạn này <strong>không tranh luận chính trị</strong> — vì chính trị thì có thể phản bác. Nó đánh vào nơi lý trí khó can thiệp nhất: <strong>đức tin</strong>.</p>
+    <div class="doc" style="border-color:var(--gold);background:linear-gradient(90deg,rgba(227,178,60,.08),transparent 65%)"><q>Không cần đến sử liệu Việt Nam. Chính hồ sơ giải mật của CIA đã thừa nhận: đó là <strong>một chiến dịch tuyên truyền có tổ chức</strong>.</q><cite>CIA · “CIA and the House of Ngo: Covert Action in South Vietnam 1954–63” · giải mật</cite></div>
+  </div>
+  <figure class="frame tall" data-tag="TL-02"><img src="${IMG}giao-dan-len-tau.jpg" alt="Giáo dân miền Bắc mang theo ảnh Đức Mẹ và thánh giá xuống tàu di cư">
+    <figcaption><b>Giáo dân miền Bắc xuống tàu di cư, 1954–1955.</b> Phía sau là mạn một chiến hạm, nòng pháo chĩa lên trời. Đức tin của người dân bị đặt lên boong tàu chiến của một đế quốc.</figcaption></figure>
+ </div>`,
+ n:"Chỉ tay vào ảnh. Nói chậm câu cuối: đức tin bị đặt lên boong tàu chiến của một đế quốc."},
+
+{m:"B",id:"7",t:"Thủ đoạn 2 — Gieo rắc sợ hãi",
+ h:`<div class="wrap split">
+  <div>
+    <div class="eyebrow">Thủ đoạn 02 — Tin đồn và truyền đơn</div>
+    <h2>Chạy trốn khỏi một điều chưa từng xảy ra</h2>
+    <ul class="pts">
+      <li>Việt Minh sẽ tàn sát người Công giáo.</li>
+      <li>Mỹ sẽ ném bom nguyên tử xuống Hà Nội.</li>
+      <li>Ai ở lại sẽ bị trả thù.</li>
+    </ul>
+    <p style="margin-top:22px">Kỹ thuật kinh điển của chiến tranh tâm lý: <strong>tạo ra một tương lai giả định đầy khủng khiếp</strong>, để người dân phải chạy trốn khỏi điều chưa hề diễn ra.</p>
+  </div>
+  <figure class="frame" data-tag="TL-03"><img src="${IMG}hai-quan-my.jpg" alt="Tàu Hải quân Hoa Kỳ chở người di cư">
+    <figcaption><b>Operation Passage to Freedom, 1954–1955.</b> Hải quân Hoa Kỳ vận chuyển khoảng 310.000 người. Một chiến dịch huy động hải quân của siêu cường — không thể gọi là “tự phát”.</figcaption></figure>
+ </div>`,
+ n:"Nối ý: một chiến dịch huy động cả hải quân siêu cường thì không thể là lựa chọn tự phát của người dân."},
+
+{m:"B",id:"8",t:"TANG CHỨNG 01 — Poster “Hãy vào Nam”",
+ h:`<div class="wrap split wide-r">
+  <figure class="frame tall" data-tag="TANG CHỨNG 01"><img src="${IMG}poster-vao-nam.jpg" alt="Truyền đơn Hãy vào Nam để tránh Cộng Sản">
+    <figcaption><b>“Hãy vào Nam để tránh Cộng-Sản”</b> · truyền đơn 1954–1955.<br>Nguồn: U.S. National Archives, ký hiệu <b>306-PPB-225</b>.</figcaption></figure>
+  <div>
+    <div class="eyebrow">Thủ đoạn 03 — Tuyên truyền thị giác</div>
+    <h2>Đây không phải thông tin.<br><span style="color:var(--red)">Đây là thao túng.</span></h2>
+    <div class="tbl-wrap"><table>
+      <tr><th style="width:36%">Nửa trên — Miền Bắc</th><th>Nửa dưới — Miền Nam</th></tr>
+      <tr><td style="font-family:var(--body);color:#CFC9BB;white-space:normal">Xám tro, u ám</td><td>Xanh lá tươi, đồng ruộng mở</td></tr>
+      <tr><td style="font-family:var(--body);color:#CFC9BB;white-space:normal">Đất treo lơ lửng, đứt gãy</td><td>Nông dân đứng thẳng, dang tay</td></tr>
+      <tr><td style="font-family:var(--body);color:#CFC9BB;white-space:normal">Bóng người đen, không mặt, tháo chạy</td><td>Con trâu đang cày — no ấm</td></tr>
+    </table></div>
+    <ul class="pts" style="margin-top:22px">
+      <li><strong>Đối lập nhị nguyên tuyệt đối.</strong> Không có sắc thái trung gian — không chừa khoảng nào để suy nghĩ.</li>
+      <li><strong>Đánh vào bản năng sinh tồn, không vào lý trí.</strong> Không một luận cứ chính trị nào. Chỉ nói: ở lại thì chết, đi thì sống.</li>
+      <li><strong>Ngụy tạo tính tự nguyện.</strong> “Dang tay chờ đón” biến chiến dịch do CIA tổ chức thành cuộc đoàn tụ ruột thịt.</li>
+    </ul>
+  </div>
+ </div>`,
+ n:"Chỉ vào đường kẻ VĨ-TUYẾN 17 giữa poster. Lưu ý chi tiết đắt: poster gọi là 'đồng bào' — địch thừa nhận một dân tộc, nhưng dùng chính poster này để chia cắt dân tộc ấy."},
+
+{m:"B",id:"9",t:"TANG CHỨNG 02 — Poster tự tố cáo",
+ h:`<div class="wrap split wide-l">
+  <figure class="frame tall" data-tag="TANG CHỨNG 02"><img src="${IMG}poster-chon-tu-do.jpg" alt="Áp phích Di cư vào Nam là chọn Tự Do gồm 15 khung ảnh">
+    <figcaption><b>“Di-cư vào Nam là chọn Tự-Do / Để kiến-thiết một đời sống tươi-đẹp”</b> · 15 khung ảnh · ấn phẩm tuyên truyền của chính quyền Quốc gia Việt Nam, 1954–1955.</figcaption></figure>
+  <div>
+    <div class="eyebrow gold">Đọc kỹ chú thích — chúng tự tố cáo chính mình</div>
+    <h2 style="font-size:clamp(24px,3vw,44px)">Tinh vi hơn: nó dùng ảnh chụp thật</h2>
+    <div class="doc" style="padding:15px 20px;margin-bottom:13px"><q style="font-size:15px">“<strong>Sức mạnh dân tộc</strong>… lúc nào cũng sẵn sàng tin theo và <strong>ủng-hộ chính-quyền Quốc-Gia</strong>.”</q><cite>Ảnh 5 → Đánh tráo khái niệm. Mục đích thật lộ ra ở vế sau: <b style="color:var(--gold)">chính trị</b>, không phải nhân đạo.</cite></div>
+    <div class="doc" style="padding:15px 20px;margin-bottom:13px;border-color:var(--gold)"><q style="font-size:15px">“…<strong>các chiến-sĩ Quốc-Gia</strong> ra đi để <strong>làm lại cuộc chiến đấu</strong>.”</q><cite>Ảnh 7 → Bằng chứng mạnh nhất. Thừa nhận trong dòng người di cư có <b style="color:var(--gold)">lực lượng vũ trang</b>. Đây là chuyển quân và cài cắm lực lượng.</cite></div>
+    <div class="doc" style="padding:15px 20px"><q style="font-size:15px">“Một công-cuộc thiêng-liêng <strong>kết giải đồng-tâm Nam-Bắc</strong>.”</q><cite>Ảnh 15 → Ngụy biện tận cùng. Chỉ hơn một năm sau, chính họ <b style="color:var(--gold)">cự tuyệt hiệp thương tổng tuyển cử</b>.</cite></div>
+  </div>
+ </div>`,
+ n:"Đây là đòn mạnh nhất phần B. Đọc từng chú thích rồi bóc ý. Chốt: poster 1 bán nỗi sợ, poster 2 bán giấc mơ — cả hai đều im lặng về Tổng tuyển cử 1956."},
+
+{m:"B",id:"10",t:"Hai poster — một sự im lặng",
+ h:`<div class="wrap" style="text-align:left">
+  <div class="eyebrow">Thủ đoạn 04 — Bộ máy quy mô nhà nước</div>
+  <div class="cols3" style="margin-bottom:34px">
+    <div class="card"><div class="k">Phương tiện</div><p>Tàu vận tải Hải quân Mỹ, máy bay Air Outre-Mer, trại tiếp cư.</p></div>
+    <div class="card"><div class="k">Tổ chức</div><p>Ủy ban liên bộ về người tị nạn của chính quyền Diệm, phối hợp Mỹ – Pháp.</p></div>
+    <div class="card"><div class="k">Tài chính</div><p>Ngân sách viện trợ Hoa Kỳ.</p></div>
+  </div>
+  <h2 style="max-width:26ch">Poster thứ nhất bán <span style="color:var(--red)">nỗi sợ</span>.<br>Poster thứ hai bán <span style="color:var(--gold)">giấc mơ</span>.</h2>
+  <p class="lede">Cả hai đều tuyệt đối im lặng về một điều: <strong>cuộc tổng tuyển cử thống nhất đất nước dự kiến năm 1956.</strong></p>
+ </div>`,
+ n:"Chốt phần B và bắc cầu sang C: vì sao họ im lặng về tổng tuyển cử? Chuyển cho C."},
+
+/* ══ C ══════════════════════════════════════════════ */
+{m:"C",id:"11",t:"Ba mục đích chính trị",
+ h:`<div class="wrap">
+  <div class="eyebrow">Mọi thủ đoạn đều phục vụ một mục đích</div>
+  <h2>Chiến dịch di cư nhằm ba mục tiêu</h2>
+  <div class="cols3">
+    <div class="card"><div class="k">Mục đích 01</div><h3>Phá hoại miền Bắc</h3><p>Rút đi trí thức, thợ kỹ thuật, viên chức. Đồng thời <strong>“phá hoại, di chuyển máy móc nguyên vật liệu trái phép”</strong>. Để lại một miền Bắc suy yếu, rối loạn.</p></div>
+    <div class="card"><div class="k">Mục đích 02</div><h3>Cấy ghép cơ sở xã hội</h3><p>Chính quyền Diệm <strong>không có cơ sở quần chúng</strong>. Gần một triệu người di cư — phụ thuộc hoàn toàn vào chính quyền về đất, nhà, lương thực — lấp vào khoảng trống đó.</p></div>
+    <div class="card" style="border-color:var(--red)"><div class="k">Mục đích 03</div><h3 style="color:var(--gold)">Dọn đường xé bỏ Tổng tuyển cử 1956</h3><p>Và đây là mục đích <strong>quan trọng nhất</strong>.</p></div>
+  </div>
+ </div>`,
+ n:"Ba mục đích. Nhấn mạnh mục đích 3 là nút thắt, dẫn sang slide sau."},
+
+{m:"C",id:"12",t:"NÚT THẮT — Tổng tuyển cử 1956",
+ h:`<div class="wrap split wide-l">
+  <div>
+    <div class="eyebrow">Nút thắt của toàn bộ vấn đề</div>
+    <h2 style="color:var(--gold);max-width:20ch">Cuộc di cư được dựng lên để thay thế cho lá phiếu</h2>
+    <p>Hiệp định Genève dự kiến <strong>tổng tuyển cử tự do trong cả nước tháng 7-1956</strong>. Mỹ và Diệm biết rõ: nếu tổng tuyển cử diễn ra, họ sẽ thất bại.</p>
+    <p>Vậy phải tạo ra một lập luận để từ chối. Và chiến dịch di cư chính là lập luận đó — <em>“gần một triệu người đã bỏ phiếu bằng đôi chân. Còn cần gì tổng tuyển cử nữa?”</em></p>
+    <div class="doc"><q>Mỹ và chính quyền Ngô Đình Diệm đã <strong>xé bỏ Hiệp định Geneve, cự tuyệt tổng tuyển cử thống nhất đất nước</strong>.</q><cite>Giáo trình · Chương 2 · Mục II.1</cite></div>
+  </div>
+  <figure class="frame" data-tag="TANG CHỨNG 03"><img src="${IMG}trung-cau-dan-y.jpg" alt="Bảng kết quả trưng cầu dân ý 23-10-1955">
+    <figcaption><b>“Trưng cầu dân ý” 23 · 10 · 1955.</b> Truất phế Bảo Đại và suy tôn Ngô Đình Diệm: <b style="color:var(--red)">5.721.735</b> phiếu thuận / <b>63.017</b> phiếu chống — tỷ lệ ~98,9%. Con số tự nó tố cáo tính chất của cuộc bỏ phiếu. Giáo trình gọi đây là <b style="color:var(--gold)">“cái gọi là trưng cầu dân ý”</b>.</figcaption></figure>
+ </div>`,
+ n:"Slide quan trọng nhất phần C. Chỉ vào hai con số trên bảng. Nhấn: 98,9% là con số của một cuộc bỏ phiếu không thực chất."},
+
+{m:"C",id:"13",t:"Một đường thẳng đến máy chém",
+ h:`<div class="wrap">
+  <div class="eyebrow">Chuỗi hành động phản dân tộc</div>
+  <h2>Đặt lên trục thời gian, logic của âm mưu hiện ra rất rõ</h2>
+  <div class="tbl-wrap"><table>
+    <tr><th style="width:120px">Thời gian</th><th>Sự kiện</th></tr>
+    <tr class="hi"><td>07·07·1954</td><td>Mỹ đưa Ngô Đình Diệm về Sài Gòn làm Thủ tướng — <strong>trước cả khi Hiệp định được ký</strong></td></tr>
+    <tr><td>1954–1955</td><td>Chiến dịch di cư: hơn 800.000–900.000 người</td></tr>
+    <tr class="hi"><td>17·07·1955</td><td>Tuyên bố <strong>không hiệp thương tổng tuyển cử</strong></td></tr>
+    <tr><td>23·10·1955</td><td>“Trưng cầu dân ý” phế Bảo Đại, Diệm lên Tổng thống</td></tr>
+    <tr><td>1955–1956</td><td>Quốc sách “tố cộng, diệt cộng”; lập “khu trù mật”, “khu dinh điền”</td></tr>
+    <tr class="hi"><td>13·05·1957</td><td>Diệm thăm Mỹ: <strong>“Biên giới Hoa Kỳ kéo dài đến vĩ tuyến 17”</strong></td></tr>
+    <tr><td>03·1959</td><td>Tuyên bố “đặt miền Nam trong tình trạng chiến tranh”</td></tr>
+    <tr class="hi"><td>05·1959</td><td><strong>Luật 10/59</strong> — lê máy chém khắp miền Nam</td></tr>
+    <tr><td>06·1963</td><td>Đàn áp Phật giáo — Hòa thượng Thích Quảng Đức tự thiêu</td></tr>
+    <tr class="hi"><td>01·11·1963</td><td>Diệm và Nhu <strong>bị chính Mỹ chỉ đạo lật đổ và giết chết</strong></td></tr>
+  </table></div>
+ </div>`,
+ n:"Không đọc hết bảng. Chỉ nhấn 4 mốc in đậm rồi chốt: một đường thẳng, từ chiến dịch di cư đến máy chém."},
+
+{m:"C",id:"14",t:"Khoảng cách giữa poster và sự thật",
+ h:`<div class="wrap split">
+  <div>
+    <div class="eyebrow">“Tố cộng, diệt cộng” · Luật 10/59</div>
+    <div class="big-num">108.835</div>
+    <p style="margin-top:12px"><strong>người bị bắt và giết chỉ trong 10 tháng</strong> (7-1955 → 5-1956) — <em>theo số liệu thống kê của chính địch.</em> Con số thực tế còn lớn hơn.</p>
+    <div class="doc"><q>Địch khủng bố những người yêu nước và cách mạng <strong>bằng cả súng đạn và máy chém</strong>.</q><cite>Giáo trình · Chương 2 · Mục II.1 · về Luật 10/59</cite></div>
+    <p style="color:var(--gold);font-size:clamp(16px,1.3vw,21px);line-height:1.45"><strong style="color:var(--gold)">Cũng chính bộ máy đó, chỉ vài năm trước, đã in ra tấm poster hứa hẹn “một đời sống tươi đẹp”.</strong></p>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:16px">
+    <figure class="frame" data-tag="TL-04"><img src="${IMG}may-chem.jpg" style="max-height:30vh" alt="Máy chém của chế độ Ngô Đình Diệm">
+      <figcaption><b>Máy chém</b> chế độ Ngô Đình Diệm sử dụng theo Luật 10/59 (hiện vật bảo tàng).</figcaption></figure>
+    <figure class="frame" data-tag="TL-05"><img src="${IMG}toi-ac-1059.jpg" style="max-height:30vh" alt="Tội ác của chế độ Ngô Đình Diệm thời kỳ tố cộng diệt cộng">
+      <figcaption><b>Tội ác thời kỳ “tố cộng, diệt cộng”.</b> Giáo trình ghi nhận nhiều vụ thảm sát đẫm máu ở Bến Tre, Quảng Nam, Phú Yên.</figcaption></figure>
+  </div>
+ </div>`,
+ n:"Nói nghiêm, chậm. Dẫn trước khi chiếu ảnh. Chốt bằng câu so sánh poster và sự thật."},
+
+{m:"C",id:"15",t:"1963 — Nghịch lý tôn giáo",
+ h:`<div class="wrap split wide-r">
+  <div>
+    <div class="eyebrow">11 · 6 · 1963 — Sài Gòn</div>
+    <h2 style="max-width:22ch">Lên nắm quyền nhờ tôn giáo. Sụp đổ vì đàn áp tôn giáo.</h2>
+    <p>Chế độ Diệm dùng đức tin Công giáo làm đòn bẩy cho chiến dịch di cư. Chín năm sau, cũng chính chế độ ấy cấm treo cờ Phật giáo, đàn áp biểu tình ở Huế, tấn công chùa chiền.</p>
+    <ul class="pts">
+      <li><strong>Phơi bày bản chất chế độ.</strong> Một chính quyền tự xưng “bảo vệ Tự-Do Dân-Chủ” lại đàn áp tôn giáo lớn nhất của dân tộc mình.</li>
+      <li><strong>Chứng minh không có tính chính danh.</strong> Khi một vị hòa thượng phải dùng thân mình làm ngọn đuốc, mọi lời tuyên truyền đều sụp đổ.</li>
+      <li><strong>Sức mạnh đấu tranh chính trị đô thị</strong> — đúng phương châm của Đảng: <em>vùng đô thị lấy đấu tranh chính trị là chủ yếu.</em></li>
+    </ul>
+    <div class="doc" style="margin-top:20px"><q>…lôi cuốn đông đảo các tầng lớp nhân dân lao động, trí thức, học sinh, sinh viên và các giáo phái tham gia, <strong>đặc biệt là phong trào đấu tranh của đồng bào Phật giáo năm 1963</strong>.</q><cite>Giáo trình · Chương 2 · Mục II.1</cite></div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:14px">
+    <figure class="frame" data-tag="TL-06"><img src="${IMG}thich-quang-duc.jpg" style="max-height:36vh" alt="Hòa thượng Thích Quảng Đức tự thiêu">
+      <figcaption><b>Hòa thượng Thích Quảng Đức tự thiêu, Sài Gòn 11-6-1963.</b> Ảnh: Malcolm Browne / AP.</figcaption></figure>
+    <div class="split" style="gap:14px">
+      <figure class="frame" data-tag="TL-07"><img src="${IMG}phat-giao-hue.jpg" style="max-height:18vh" alt="Biểu tình Phật giáo tại Huế 1963"><figcaption>Phong trào đấu tranh của đồng bào Phật giáo, 1963.</figcaption></figure>
+      <figure class="frame" data-tag="TL-08"><img src="${IMG}trai-tim-bo-tat.jpg" style="max-height:18vh" alt="Trái tim bất diệt của Bồ tát Thích Quảng Đức"><figcaption>Trái tim bất diệt của Bồ tát Thích Quảng Đức.</figcaption></figure>
+    </div>
+  </div>
+ </div>`,
+ n:"Đây là điểm nhấn cảm xúc phần C. Nói chậm, để ảnh nói thay."},
+
+{m:"C",id:"16",t:"Cái kết của một con bài",
+ h:`<div class="wrap split wide-l">
+  <div>
+    <div class="eyebrow">1 · 11 · 1963</div>
+    <h2>Vì sao Mỹ loại bỏ chính tay sai của mình?</h2>
+    <ul class="pts">
+      <li><strong>Thất bại quân sự.</strong> “Quốc sách ấp chiến lược” phá sản: ta phá hoàn toàn 2.895/6.161 ấp, làm chủ 12.000/17.000 thôn. Một công cụ hết hiệu quả thì phải thay.</li>
+      <li><strong>Thất bại chính trị.</strong> Khủng hoảng Phật giáo 1963 phá hủy hình ảnh “thế giới tự do”. Diệm trở thành gánh nặng cho Washington.</li>
+      <li><strong>Không còn dễ sai khiến.</strong> Diệm – Nhu ngày càng đòi tự chủ. Với Mỹ, <em>một tay sai đòi tự chủ thì không còn là tay sai.</em></li>
+    </ul>
+    <div class="doc" style="margin-top:22px;border-color:var(--gold)"><q><strong>Diệm bị loại không phải vì có tội với nhân dân Việt Nam — mà vì đã hết giá trị sử dụng đối với ông chủ Mỹ.</strong></q><cite>Nhận định của nhóm, từ các dữ kiện trên</cite></div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:12px">
+    <figure class="frame" data-tag="TL-09"><img src="${IMG}diem-eisenhower.jpg" style="max-height:22vh" alt="Tổng thống Eisenhower đón Ngô Đình Diệm tại Washington 1957">
+      <figcaption><b>Eisenhower và Ngoại trưởng Dulles đón Ngô Đình Diệm tại Washington, 5-1957</b> — chuyến đi Diệm tuyên bố “Biên giới Hoa Kỳ kéo dài đến vĩ tuyến 17”.</figcaption></figure>
+    <figure class="frame" data-tag="MINH HỌA"><img src="${IMG}diem-nhu-chan-dung.jpg" style="max-height:15vh" alt="Ngô Đình Diệm và Ngô Đình Nhu">
+      <figcaption><b>Ngô Đình Diệm và Ngô Đình Nhu</b> — ảnh đồ họa minh họa kết cục của hai người đứng đầu chế độ.</figcaption></figure>
+    <figure class="frame" data-tag="TL-10"><img src="${IMG}diem-nhu-m113.jpg" style="max-height:22vh" alt="Thi thể Ngô Đình Diệm và Ngô Đình Nhu trong xe thiết giáp M113">
+      <figcaption><b>Thi thể Diệm và Nhu trong xe thiết giáp M113, 1-11-1963.</b> Kẻ đã đưa Diệm lên, cũng chính là kẻ hạ Diệm xuống.</figcaption></figure>
+  </div>
+ </div>`,
+ n:"Hai ảnh đặt cạnh nhau: bắt tay Tổng thống Mỹ năm 1957, và thi thể trong xe thiết giáp năm 1963. Để hình ảnh tự nói."},
+
+{m:"C",id:"17",t:"10 cuộc đảo chính",
+ h:`<div class="wrap split wide-l">
+  <div>
+    <div class="eyebrow">Sau Ngô Đình Diệm là ai?</div>
+    <div class="doc"><q>Từ tháng 11-1963 đến tháng 6-1965 đã diễn ra <strong>10 cuộc đảo chính quân sự</strong> nhằm lật đổ lẫn nhau trong nội bộ chính quyền Sài Gòn.</q><cite>Giáo trình · Chương 2 · Mục II.1</cite></div>
+    <div class="tbl-wrap"><table>
+      <tr><th style="width:104px">Mốc</th><th>Người cầm quyền</th></tr>
+      <tr><td>01·11·1963</td><td>Dương Văn Minh — sau đảo chính giết Diệm – Nhu</td></tr>
+      <tr><td>30·01·1964</td><td>Nguyễn Khánh — cuộc “chỉnh lý”</td></tr>
+      <tr><td>1964–1965</td><td>Đảo chính và phản đảo chính liên tiếp</td></tr>
+      <tr><td>06·1965</td><td>Nguyễn Văn Thiệu – Nguyễn Cao Kỳ</td></tr>
+      <tr><td>1967–1975</td><td>Nguyễn Văn Thiệu làm Tổng thống</td></tr>
+      <tr class="hi"><td>30·04·1975</td><td><strong>Đầu hàng vô điều kiện — chính quyền Sài Gòn sụp đổ</strong></td></tr>
+    </table></div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:20px;justify-content:center">
+    <div class="card"><div class="k">Nhận xét 01</div><p>Không một chính quyền nào do <strong>nhân dân bầu ra</strong>. Tất cả lên bằng súng của quân đội và cái gật đầu của Mỹ.</p></div>
+    <div class="card"><div class="k">Nhận xét 02</div><p>Sự hỗn loạn ấy <strong>tự nó là bằng chứng</strong> — và là một trong ba trụ cột bị lung lay tận gốc.</p></div>
+    <div class="card" style="border-color:var(--gold)"><div class="k" style="color:var(--gold)">Nhận xét 03 — đối chiếu</div><p>Cùng thời gian đó miền Bắc có <strong>Đại hội III</strong>, có Quốc hội, có Hiến pháp, có kế hoạch 5 năm. Một bên <strong>xây dựng</strong> — một bên <strong>đảo chính lẫn nhau</strong>.</p></div>
+  </div>
+ </div>`,
+ n:"Chốt phần C: chính quyền nào không có nhân dân thì phải sống bằng đảo chính. Chuyển cho D."},
+
+/* ══ D ══════════════════════════════════════════════ */
+{m:"D",id:"18",t:"Đảng chống cưỡng ép di cư",
+ h:`<div class="wrap">
+  <div class="eyebrow">Câu hỏi cốt lõi của môn học: Đảng đã lãnh đạo như thế nào?</div>
+  <h2>Ngay từ 1954, Đảng đã có đối sách</h2>
+  <div class="doc"><q>Đảng và Nhà nước đã ban hành kịp thời nhiều chính sách…: <strong>chính sách đối với tôn giáo</strong>; chính sách đối với công chức, trí thức trước đây làm việc cho địch; chính sách đối với ngụy quân. Ngoài ra còn <strong>huy động hàng vạn cán bộ, bộ đội… tuyên truyền, vận động quần chúng đấu tranh chống địch cưỡng ép di cư</strong>.</q><cite>Giáo trình · Chương 2 · Mục II.1</cite></div>
+  <div class="cols3">
+    <div class="card"><div class="k">Phương pháp</div><p>Địch dùng tin đồn, hù dọa, ép buộc. Đảng dùng <strong>tuyên truyền, vận động, giải thích</strong>. Khác biệt căn bản về bản chất.</p></div>
+    <div class="card"><div class="k">Đánh trúng gốc rễ</div><p>Địch khai thác nỗi sợ tôn giáo → Đảng ban hành <strong>chính sách tôn giáo</strong>. Địch khai thác nỗi sợ trả thù → Đảng ban hành <strong>chính sách khoan hồng</strong>.</p></div>
+    <div class="card" style="border-color:var(--gold)"><div class="k" style="color:var(--gold)">Kết quả</div><p><strong>10-10-1954</strong> người lính Pháp cuối cùng rút khỏi Hà Nội. <strong>16-5-1955</strong> toàn bộ quân viễn chinh Pháp rút khỏi miền Bắc.</p></div>
+  </div>
+ </div>`,
+ n:"Đây là chỗ trả lời câu hỏi quan trọng nhất của môn học. Nhấn: đại đoàn kết dân tộc vận dụng vào tình huống cụ thể."},
+
+{m:"D",id:"19",t:"Miền Bắc — hậu phương lớn",
+ h:`<div class="wrap split wide-l">
+  <div>
+    <div class="eyebrow">Xây dựng hậu phương lớn</div>
+    <h2>Cải cách ruộng đất — thành tựu</h2>
+    <div class="split" style="gap:26px;margin-bottom:20px">
+      <div><div class="big-num" style="font-size:clamp(30px,4vw,58px)">9 triệu</div><p class="dim" style="font-size:14px;margin-top:6px">người trong hơn 2 triệu hộ nông dân được chia ruộng</p></div>
+      <div><div class="big-num" style="font-size:clamp(30px,4vw,58px)">810.000<span style="font-size:.45em"> ha</span></div><p class="dim" style="font-size:14px;margin-top:6px">ruộng đất được chia. Chế độ chiếm hữu ruộng đất phong kiến bị xóa bỏ hoàn toàn</p></div>
+    </div>
+    <p>Đến 1957, nông nghiệp miền Bắc đạt mức năng suất và sản lượng của <strong>năm 1939 — năm cao nhất thời Pháp thuộc</strong>. Nạn đói bị đẩy lùi.</p>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:14px">
+    <figure class="frame" data-tag="TL-11"><img src="${IMG}duong-truong-son.jpg" style="max-height:26vh" alt="Tuyến vận tải chiến lược Trường Sơn">
+      <figcaption><b>Tuyến vận tải chiến lược Trường Sơn — đường 559, khai thông 19-5-1959.</b> Miền Bắc chi viện miền Nam.</figcaption></figure>
+    <figure class="frame" data-tag="TL-12"><img src="${IMG}dai-hoi-iii.jpg" style="max-height:26vh" alt="Đại hội đại biểu toàn quốc lần thứ III của Đảng">
+      <figcaption><b>Đại hội đại biểu toàn quốc lần thứ III của Đảng, Hà Nội 9-1960.</b></figcaption></figure>
+  </div>
+ </div>`,
+ n:"Nêu thành tựu trước, rồi chuyển sang phần sai lầm — cho thấy nhóm trình bày khách quan."},
+
+{m:"D",id:"20",t:"Sai lầm cải cách ruộng đất",
+ h:`<div class="wrap">
+  <div class="eyebrow">Giáo trình không né tránh</div>
+  <h2>Sai lầm cụ thể là gì?</h2>
+  <div class="split" style="gap:26px">
+    <ul class="pts">
+      <li><strong>Nguyên nhân gốc.</strong> <em>“Chủ quan, giáo điều, không xuất phát từ tình hình thực tiễn”</em> — máy móc áp dụng kinh nghiệm nước ngoài vào một nông thôn Việt Nam đã thay đổi căn bản sau kháng chiến.</li>
+      <li><strong>Mở rộng quá mức đối tượng.</strong> <em>“Cường điệu hóa đấu tranh giai cấp ở nông thôn, dẫn đến mở rộng quá mức đối tượng đấu tranh”</em> — quy sai thành phần, đánh cả vào những người đáng lẽ là bạn đồng minh của cách mạng.</li>
+      <li><strong>Phương pháp không phù hợp</strong> với đối tượng là địa chủ ở nông thôn Việt Nam — vốn phần lớn là địa chủ nhỏ, sống trong làng xã.</li>
+      <li><strong>Xử lý oan cán bộ, đảng viên tốt.</strong> Nhận định sai rằng cơ sở Đảng ở nông thôn đã bị địch lũng đoạn.</li>
+    </ul>
+    <div>
+      <div class="card" style="border-color:var(--red);margin-bottom:18px"><div class="k">Hậu quả</div><p>“Gây ra một số tổn thất đối với Đảng và <strong>quan hệ giữa Đảng với nhân dân</strong>.”</p></div>
+      <div class="card"><div class="k" style="color:var(--gold)">Cần phân biệt — giai cấp tư sản dân tộc</div><p>Không thuộc diện cải cách ruộng đất, mà thuộc <strong>cải tạo công thương nghiệp (1958–1960)</strong>, với chính sách rất mềm dẻo: <strong>“cải tạo hòa bình”</strong>, <strong>không tịch thu mà “chuộc lại”</strong> qua công tư hợp doanh, và <strong>vẫn coi giai cấp tư sản là thành viên của Mặt trận Tổ quốc</strong>.<br><span class="dim" style="font-size:12.5px">— Hội nghị Trung ương 16, 4-1959</span></p></div>
+    </div>
+  </div>
+ </div>`,
+ n:"Nói rõ phân biệt: CCRĐ nhắm địa chủ; tư sản dân tộc thuộc diện cải tạo công thương nghiệp với chính sách chuộc lại. Đây là chỗ dễ bị hỏi."},
+
+{m:"D",id:"21",t:"Đảng sửa sai",
+ h:`<div class="wrap">
+  <div class="eyebrow gold">Hội nghị Trung ương 10 · khóa II · 9 · 1956</div>
+  <h2>Bốn hành động cụ thể — không phải lời nói suông</h2>
+  <div class="cols3" style="margin-bottom:26px">
+    <div class="card"><div class="k">01</div><p>Nghiêm khắc kiểm điểm</p></div>
+    <div class="card"><div class="k">02</div><p><strong>Công khai tự phê bình trước nhân dân</strong> — không giấu trong nội bộ</p></div>
+    <div class="card" style="border-color:var(--red)"><div class="k">03 – 04</div><p><strong>Thi hành kỷ luật cả Ủy viên Bộ Chính trị và Ủy viên Trung ương</strong>; tiến hành sửa sai, minh oan, phục hồi</p></div>
+  </div>
+  <div class="tbl-wrap"><table class="cmp">
+    <tr><th style="width:26%"></th><th style="color:#C9928F">Chính quyền Ngô Đình Diệm</th><th style="color:#B9D2B4">Đảng Cộng sản Việt Nam</th></tr>
+    <tr><td>Khi làm sai</td><td>In poster tô hồng, che giấu, leo thang</td><td>Công khai nhận lỗi trước nhân dân</td></tr>
+    <tr><td>Với người thi hành sai</td><td>Không ai chịu trách nhiệm</td><td>Kỷ luật tới Ủy viên Bộ Chính trị</td></tr>
+    <tr><td>Với nạn nhân</td><td>Tiếp tục “tố cộng, diệt cộng”, máy chém</td><td>Minh oan, sửa sai, phục hồi</td></tr>
+    <tr><td>Kết quả</td><td>Bị chính Mỹ lật đổ và giết (1-11-1963)</td><td>Giữ được lòng tin của nhân dân</td></tr>
+  </table></div>
+  <p style="margin-top:22px;color:var(--gold);font-size:clamp(15px,1.25vw,20px)"><strong style="color:var(--gold)">Chỉ có ai thực sự vì dân mới dám nhận lỗi trước dân.</strong></p>
+ </div>`,
+ n:"Đây là slide mạnh nhất phần D. Bảng so sánh nói thay lời. Chốt bằng câu vàng."},
+
+{m:"D",id:"22",t:"Nghị quyết 15 → Đồng khởi",
+ h:`<div class="wrap split wide-l">
+  <div>
+    <div class="eyebrow">1 · 1959 → 17 · 1 · 1960</div>
+    <h2>Từ giữ gìn lực lượng sang thế tiến công</h2>
+    <div class="doc"><q>Chính sách khủng bố và chiến tranh đó đã làm cho mâu thuẫn… thêm gay gắt, <strong>làm cho tình thế cách mạng chín muồi</strong>, dẫn đến bùng nổ các cuộc khởi nghĩa của quần chúng.</q><cite>Giáo trình · Chương 2 · Mục II.1</cite></div>
+    <p><strong>Nghị quyết 15 (1-1959):</strong> sử dụng <strong>bạo lực cách mạng</strong> với hai lực lượng chính trị và vũ trang, kết hợp đấu tranh chính trị với đấu tranh quân sự.</p>
+    <div class="split" style="gap:22px;margin:20px 0">
+      <div><div class="big-num" style="font-size:clamp(26px,3.4vw,48px)">1.383<span style="font-size:.4em">/2.627</span></div><p class="dim" style="font-size:13.5px;margin-top:6px">xã nhân dân lập chính quyền tự quản, cuối 1960</p></div>
+      <div><div class="big-num" style="font-size:clamp(26px,3.4vw,48px)">20·12·1960</div><p class="dim" style="font-size:13.5px;margin-top:6px">Mặt trận Dân tộc giải phóng miền Nam Việt Nam ra đời</p></div>
+    </div>
+    <p style="color:var(--gold)"><strong style="color:var(--gold)">Nhân dân miền Nam đã trả lời chiến dịch tuyên truyền của địch — không phải bằng tranh luận, mà bằng đồng khởi.</strong></p>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:14px">
+    <figure class="frame" data-tag="TL-13"><img src="${IMG}dong-khoi-ben-tre.jpg" style="max-height:28vh" alt="Phong trào Đồng khởi Bến Tre">
+      <figcaption><b>Phong trào Đồng khởi, Bến Tre 17-1-1960</b>, do đồng chí Nguyễn Thị Định lãnh đạo tại Mỏ Cày.</figcaption></figure>
+    <figure class="frame" data-tag="TL-14"><img src="${IMG}mat-tran-dtgp.jpg" style="max-height:24vh" alt="Mặt trận Dân tộc giải phóng miền Nam Việt Nam">
+      <figcaption><b>Mặt trận Dân tộc giải phóng miền Nam Việt Nam</b>, thành lập 20-12-1960 tại Tân Lập, Tây Ninh. Chủ tịch: Luật sư Nguyễn Hữu Thọ.</figcaption></figure>
+  </div>
+ </div>`,
+ n:"Đồng khởi là bước nhảy vọt có ý nghĩa lịch sử. Nhấn câu chốt vàng."},
+
+{m:"D",id:"23",t:"Mặt trận thầm lặng",
+ h:`<div class="wrap split wide-r">
+  <div>
+    <div class="eyebrow">Trong lòng địch</div>
+    <h2>Đại tá Phạm Ngọc Thảo<br><span class="dim" style="font-family:var(--mono);font-size:.34em;letter-spacing:.2em">1922 — 1965</span></h2>
+    <p>Người Công giáo, mang <strong>quốc tịch Pháp</strong>, xuất thân đại điền chủ — đúng ba tiêu chuẩn mà chế độ Diệm tin tưởng nhất. Ông được <strong>anh em Ngô Đình Diệm – Ngô Đình Nhu hết sức tin dùng</strong>, thăng tới <strong>Đại tá quân đội Sài Gòn</strong> và <strong>Tỉnh trưởng Kiến Hòa — tức Bến Tre</strong>.</p>
+    <p style="color:var(--gold);font-size:clamp(16px,1.3vw,21px)"><strong style="color:var(--gold)">Nhưng ông là chiến sĩ tình báo của cách mạng, hoạt động đơn tuyến — không một ai khác biết thân phận thật của ông.</strong></p>
+    <p>Từ vị trí ấy ông không chỉ lấy tin, mà trực tiếp làm rối loạn bộ máy địch: tham gia đảo chính lật Diệm <strong>1-11-1963</strong>, rồi <strong>chủ mưu cuộc đảo chính 19-2-1965 — suýt nữa thành công</strong>.</p>
+    <div class="doc" style="border-color:var(--gold)"><q>Vậy nên <strong>“10 cuộc đảo chính” không hoàn toàn là chuyện nội bộ của địch.</strong> Trong đó có bàn tay của cách mạng.</q><cite>Nhận định của nhóm</cite></div>
+  </div>
+  <figure class="frame tall" data-tag="TL-15"><img src="${IMG}pham-ngoc-thao.jpg" alt="Đại tá Phạm Ngọc Thảo">
+    <figcaption><b>Đại tá Phạm Ngọc Thảo (1922–1965).</b> Ảnh: LIFE.</figcaption></figure>
+ </div>`,
+ n:"Rút gọn: được Diệm-Nhu cưng chiều nhưng là tình báo cách mạng, đảo chính suýt thành công. Không sa đà."},
+
+{m:"D",id:"24",t:"Ba mươi năm im lặng",
+ h:`<div class="wrap">
+  <div class="eyebrow">17 · 7 · 1965 — hy sinh khi 43 tuổi</div>
+  <h1 style="font-size:clamp(30px,5vw,78px);max-width:20ch">BA MƯƠI NĂM<br>NẰM DƯỚI TÊN GỌI<br><span style="color:var(--red)">CỦA KẺ THÙ</span></h1>
+  <p class="lede" style="margin-top:26px">Vì hoạt động <strong>đơn tuyến</strong>, khi ông ngã xuống <strong>gần như không ai chứng minh được ông là người của cách mạng</strong>. Ông nằm xuống dưới danh phận một đại tá quân đội Sài Gòn.</p>
+  <p class="lede">Mãi <strong style="color:var(--gold)">30-8-1995</strong>, ông mới được Nhà nước <strong>truy tặng danh hiệu Anh hùng Lực lượng vũ trang nhân dân</strong>.</p>
+  <div class="doc" style="margin-top:26px"><q>…<strong>vai trò đóng góp của lực lượng hoạt động bí mật trong lòng địch</strong>, “lực lượng thứ ba” và các chiến sĩ đấu tranh kiên cường trong các nhà tù Mỹ – ngụy…</q><cite>Giáo trình · Chương 2 · Mục II.3 — Nguyên nhân thắng lợi</cite></div>
+  <p style="margin-top:22px;color:var(--gold);font-size:clamp(15px,1.25vw,20px)"><strong style="color:var(--gold)">Một người Công giáo lại là chiến sĩ cộng sản trung kiên — đó là câu trả lời đanh thép nhất cho luận điệu “Chúa đã bỏ miền Bắc” năm 1954.</strong></p>
+ </div>`,
+ n:"Điểm nhấn cảm xúc. Ngừng một nhịp sau câu 'ba mươi năm'. Đây là chỗ khép vòng với poster đầu bài."},
+
+{m:"D",id:"25",t:"Đại hội III — 9·1960",
+ h:`<div class="wrap">
+  <div class="eyebrow gold">Đại hội đại biểu toàn quốc lần thứ III · Hà Nội · 9 · 1960</div>
+  <h2 style="max-width:26ch">“Đại hội xây dựng chủ nghĩa xã hội ở miền Bắc và đấu tranh hòa bình thống nhất nước nhà”</h2>
+  <p class="dim" style="font-family:var(--mono);font-size:12px;letter-spacing:.14em;margin-top:-12px">— CHỦ TỊCH HỒ CHÍ MINH, DIỄN VĂN KHAI MẠC</p>
+  <div class="split" style="margin:30px 0">
+    <div class="card"><div class="k">Miền Bắc</div><p>Cách mạng XHCN — xây dựng tiềm lực, bảo vệ căn cứ địa của cả nước, hậu thuẫn miền Nam.<br><strong style="color:var(--gold)">Vai trò quyết định nhất</strong></p></div>
+    <div class="card"><div class="k">Miền Nam</div><p>Cách mạng dân tộc dân chủ nhân dân — giải phóng miền Nam khỏi ách thống trị của đế quốc Mỹ và tay sai.<br><strong style="color:var(--gold)">Vai trò quyết định trực tiếp</strong></p></div>
+  </div>
+  <div class="doc"><q>Thành công cơ bản, to lớn nhất của Đại hội lần thứ III là đã <strong>hoàn chỉnh đường lối chiến lược chung của cách mạng Việt Nam</strong> trong giai đoạn mới… Đó chính là <strong>đường lối giương cao ngọn cờ độc lập dân tộc và chủ nghĩa xã hội</strong>.</q><cite>Giáo trình · Chương 2 · Mục II.1</cite></div>
+ </div>`,
+ n:"Đây là đỉnh cao lý luận của giai đoạn. Nhấn: hai chiến lược, một mục tiêu chung."},
+
+{m:"D",id:"26",t:"Phá sản “Chiến tranh đặc biệt”",
+ h:`<div class="wrap split wide-l">
+  <div>
+    <div class="eyebrow">1961 – 1965</div>
+    <h2>Ba trụ cột đều lung lay tận gốc</h2>
+    <div class="cols3" style="gap:12px;margin-bottom:22px">
+      <div class="card" style="padding:15px"><div class="k">2 chân</div><p style="font-size:13.5px">Quân sự · Chính trị</p></div>
+      <div class="card" style="padding:15px"><div class="k">3 mũi</div><p style="font-size:13.5px">Quân sự · Chính trị · Binh vận</p></div>
+      <div class="card" style="padding:15px"><div class="k">3 vùng</div><p style="font-size:13.5px">Đô thị · Đồng bằng · Rừng núi</p></div>
+    </div>
+    <div class="tbl-wrap"><table>
+      <tr class="hi"><td>02·01·1963</td><td><strong>Chiến thắng Ấp Bắc</strong> — phá sản chiến thuật “trực thăng vận”, “thiết xa vận”</td></tr>
+      <tr><td>1961–1963</td><td>Phá hoàn toàn <strong>2.895/6.161</strong> ấp chiến lược · làm chủ <strong>12.000/17.000</strong> thôn · giải phóng <strong>5/14</strong> triệu dân</td></tr>
+      <tr><td>1964–1965</td><td>Bình Giã · Ba Gia · Đồng Xoài</td></tr>
+    </table></div>
+    <div class="doc" style="margin-top:20px"><q>Chiến lược “Chiến tranh đặc biệt” của đế quốc Mỹ được triển khai đến mức cao nhất đã <strong>hoàn toàn bị phá sản</strong>.</q><cite>Giáo trình · Chương 2 · Mục II.1</cite></div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:14px">
+    <figure class="frame" data-tag="TL-16"><img src="${IMG}ap-chien-luoc.webp" style="max-height:26vh" alt="Ấp chiến lược">
+      <figcaption><b>“Ấp chiến lược”</b> — quốc sách bình định của Mỹ và chính quyền Sài Gòn, dự định lập 17.000 ấp.</figcaption></figure>
+    <figure class="frame" data-tag="TL-17"><img src="${IMG}ap-bac.jpg" style="max-height:26vh" alt="Chiến thắng Ấp Bắc">
+      <figcaption><b>Chiến thắng Ấp Bắc (Mỹ Tho), 2-1-1963.</b></figcaption></figure>
+  </div>
+ </div>`,
+ n:"Không đọc hết bảng, chỉ nhấn Ấp Bắc và số liệu phá ấp chiến lược."},
+
+{m:"D",id:"27",t:"Kết luận — ba tầng ý nghĩa",
+ h:`<div class="wrap">
+  <div class="eyebrow">Kết luận</div>
+  <h2>Ba tầng ý nghĩa</h2>
+  <div class="cols3">
+    <div class="card"><div class="k">Tầng 01 — Bản chất sự kiện</div><p>Cuộc di cư 1954–1955 <strong>không phải một lựa chọn tự phát</strong>. Đó là chiến dịch chiến tranh tâm lý có tổ chức: CIA chỉ đạo, hải quân Mỹ chuyên chở, chính quyền tay sai tiếp nhận — nhằm phá hoại miền Bắc, cấy ghép cơ sở xã hội, và <strong>dọn đường xé bỏ Tổng tuyển cử 1956</strong>.</p></div>
+    <div class="card"><div class="k">Tầng 02 — Vị trí lịch sử</div><p><strong>Thủ đoạn mở màn của chủ nghĩa thực dân kiểu mới.</strong> Từ tấm poster hứa hẹn “tự do” 1954, đến máy chém Luật 10/59 năm 1959, đến ngọn lửa Thích Quảng Đức 1963, và cái chết của chính Ngô Đình Diệm — <strong>tất cả nằm trên một đường thẳng logic</strong>.</p></div>
+    <div class="card" style="border-color:var(--red)"><div class="k">Tầng 03 — Sự lãnh đạo của Đảng</div><p>Đảng nhận rõ kẻ thù <strong>ngay từ 7-1954</strong>; đối sách bằng vận động quần chúng và đại đoàn kết dân tộc; giữ miền Bắc làm hậu phương lớn; và bằng <strong>Nghị quyết 15 → Đồng khởi → Đại hội III</strong> đã làm phá sản hoàn toàn “Chiến tranh đặc biệt”.</p></div>
+  </div>
+ </div>`,
+ n:"Đọc chậm ba tầng. Đây là phần chấm điểm luận điểm."},
+
+{m:"D",id:"28",t:"Lời cuối",
+ h:`<div class="wrap">
+  <div class="eyebrow">Và một lời cuối</div>
+  <p class="lede">Chúng em phê phán chính sách di cư của Mỹ và Ngô Đình Diệm — nhưng <strong>không phê phán đồng bào đã di cư</strong>. Trong dòng người ấy có những người thực sự lo âu trước một tương lai họ không rõ.</p>
+  <h1 style="font-size:clamp(26px,4.2vw,64px);max-width:24ch;margin:26px 0">NHƯNG NỖI LO ÂU ẤY<br><span style="color:var(--red)">KHÔNG TỰ SINH RA.</span></h1>
+  <p class="lede">Nó đã bị <strong>gieo rắc, khuếch đại và khai thác</strong> một cách có tính toán. Vì thế mũi phê phán không hướng vào những người ra đi — mà hướng vào <strong>kẻ đã biến đồng bào mình thành con bài chính trị</strong>.</p>
+  <div class="doc" style="margin-top:26px;border-color:var(--gold)"><q>Một dân tộc chỉ giữ được vận mệnh của mình khi có <strong>một đường lối độc lập, tự chủ</strong> và <strong>một Đảng đủ bản lĩnh để lãnh đạo</strong>.<br><br>Bài học ấy hôm nay vẫn nguyên giá trị: <strong>thông tin có thể trở thành vũ khí — và bảo vệ nền tảng tư tưởng của Đảng cũng chính là bảo vệ chủ quyền của Tổ quốc.</strong></q><cite>Nhóm xin hết phần trình bày — cảm ơn cô và các bạn</cite></div>
+ </div>`,
+ n:"Ngừng một nhịp trước câu 'không tự sinh ra'. Kết thúc, cảm ơn, chuyển sang trò chơi ôn tập."},
+];
+
+const NAME={A:"A · Mở đầu & Đặt vấn đề",B:"B · Bóc trần thủ đoạn",C:"C · Mục đích & Hệ quả",D:"D · Sự lãnh đạo của Đảng"};
+const stage=document.getElementById("stage"),bar=document.getElementById("bar"),
+      who=document.getElementById("who"),whoName=document.getElementById("whoName"),
+      count=document.getElementById("count"),ov=document.getElementById("ov"),
+      ovg=document.getElementById("ovg"),notes=document.getElementById("notes"),
+      notesBody=document.getElementById("notesBody"),clock=document.getElementById("clock");
+let i=0;
+clock.style.opacity=".45";
+
+S.forEach((s,k)=>{
+  const el=document.createElement("section");
+  el.className="slide";el.id="s"+k;el.setAttribute("aria-label",`Slide ${k+1}: ${s.t}`);
+  el.innerHTML=s.h;stage.appendChild(el);
+  const b=document.createElement("button");
+  b.className="ovc";b.dataset.m=s.m;
+  b.innerHTML=`<div class="n">${String(k+1).padStart(2,"0")} · ${s.m}</div><div class="t">${s.t}</div>`;
+  b.onclick=()=>{go(k);closeOv();};
+  ovg.appendChild(b);
+});
+
+function go(n){
+  i=Math.max(0,Math.min(S.length-1,n));
+  document.querySelectorAll(".slide").forEach(e=>e.classList.remove("on"));
+  document.getElementById("s"+i).classList.add("on");
+  const s=S[i];
+  bar.style.width=((i+1)/S.length*100)+"%";
+  who.dataset.m=s.m;whoName.textContent=NAME[s.m];
+  count.textContent=String(i+1).padStart(2,"0")+" / "+S.length;
+  notesBody.innerHTML="<p>"+(s.n||"—")+"</p>";
+  location.hash=s.id;
+}
+function closeOv(){ov.classList.remove("on")}
+
+/* hẹn giờ tập nói — mục tiêu 20 phút */
+let t=0,run=null;
+function tick(){
+  t++;const m=Math.floor(t/60),s=t%60;
+  clock.textContent=String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
+  clock.className=t>=1200?"over":t>=1020?"warn":"";
+}
+function toggleTimer(){
+  if(run){clearInterval(run);run=null;clock.style.opacity=".5";}
+  else{run=setInterval(tick,1000);clock.style.opacity="1";}
+}
+
+addEventListener("keydown",e=>{
+  const k=e.key;
+  if(k==="Escape"){closeOv();notes.classList.remove("on");return}
+  if(ov.classList.contains("on")&&k!=="o"&&k!=="O")return;
+  if(k==="ArrowRight"||k==="PageDown"||k===" "){e.preventDefault();go(i+1)}
+  else if(k==="ArrowLeft"||k==="PageUp"){e.preventDefault();go(i-1)}
+  else if(k==="Home"){go(0)} else if(k==="End"){go(S.length-1)}
+  else if(k==="o"||k==="O"){ov.classList.toggle("on")}
+  else if(k==="s"||k==="S"){notes.classList.toggle("on")}
+  else if(k==="t"||k==="T"){toggleTimer()}
+  else if(k==="f"||k==="F"){document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen()}
+});
+stage.addEventListener("click",e=>{
+  if(e.target.closest("figure,table,a"))return;
+  go(e.clientX>innerWidth*.5?i+1:i-1);
+});
+let x0=null;
+stage.addEventListener("touchstart",e=>x0=e.changedTouches[0].clientX,{passive:true});
+stage.addEventListener("touchend",e=>{
+  if(x0===null)return;const d=e.changedTouches[0].clientX-x0;
+  if(Math.abs(d)>52)go(d<0?i+1:i-1);x0=null;
+});
+
+const h=location.hash.slice(1);
+const start=S.findIndex(s=>s.id===h);
+go(start>=0?start:0);
+</script>
+</body>
+</html>
