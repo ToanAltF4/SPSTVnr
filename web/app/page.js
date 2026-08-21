@@ -605,7 +605,9 @@ export default function Page() {
                   Ông hy sinh <strong>17-7-1965</strong> khi mới 43 tuổi. Vì hoạt động đơn tuyến, suốt
                   nhiều năm <strong>không ai chứng minh được ông là người của cách mạng</strong>. Mãi{' '}
                   <strong>30-8-1995</strong> ông mới được truy tặng danh hiệu{' '}
-                  <strong>Anh hùng Lực lượng vũ trang nhân dân</strong>.
+                  <strong>Anh hùng Lực lượng vũ trang nhân dân</strong>
+                  <strong> Vậy nên “10 cuộc đảo chính” không hoàn toàn là chuyện nội bộ của địch.</strong>
+                  <strong> Trong đó có bàn tay của cách mạng.</strong>
                 </q>
                 <cite>Ba mươi năm nằm dưới tên gọi của kẻ thù</cite>
               </div>
