@@ -763,7 +763,7 @@ export default function Page() {
           </div>
           <div className="base">
             <span>Vĩ tuyến 17 · 1954 — 1965</span>
-            <span>Nhóm 4 thành viên · Lớp …</span>
+            <span>Nhóm 6 · Lớp 3W_VNR202_06</span>
           </div>
         </div>
       </footer>

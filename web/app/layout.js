@@ -11,6 +11,7 @@ export const metadata = {
       'Poster đã nói dối — bóc trần chiến dịch di cư 1954–1955 và sự lãnh đạo của Đảng đối với cách mạng hai miền Nam – Bắc.',
     type: 'website',
     locale: 'vi_VN',
+    siteName: 'Nhóm 6 · 3W_VNR202_06',
   },
 };
 
