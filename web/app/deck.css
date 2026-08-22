@@ -93,15 +93,15 @@
 .eyebrow.gold { color: var(--gold); }
 
 .slide h1 {
-  font-family: var(--display); font-size: clamp(38px, 6.6vw, 104px); line-height: 0.94;
+  font-family: var(--display); font-weight: 800; font-size: clamp(38px, 6.6vw, 104px); line-height: 0.94;
   letter-spacing: -0.022em; margin: 0; text-wrap: balance;
 }
 .slide h2 {
-  font-family: var(--display); font-size: clamp(26px, 3.5vw, 54px); line-height: 1.04;
+  font-family: var(--display); font-weight: 800; font-size: clamp(26px, 3.5vw, 54px); line-height: 1.04;
   letter-spacing: -0.016em; margin: 0 0 22px; text-wrap: balance;
 }
 .slide h3 {
-  font-family: var(--display); font-size: clamp(17px, 1.55vw, 24px); line-height: 1.18;
+  font-family: var(--display); font-weight: 800; font-size: clamp(17px, 1.55vw, 24px); line-height: 1.18;
   margin: 0 0 10px; letter-spacing: -0.008em;
 }
 .slide p { margin: 0 0 15px; max-width: 66ch; font-size: clamp(14.5px, 1.06vw, 18px); color: #cfc9bb; }
@@ -110,7 +110,7 @@
 .slide em { color: var(--gold); font-style: italic; }
 .dim { color: var(--paper-dim) !important; }
 .big-num {
-  font-family: var(--display); font-size: clamp(44px, 7vw, 104px); line-height: 0.9;
+  font-family: var(--display); font-weight: 900; font-size: clamp(44px, 7vw, 104px); line-height: 0.9;
   color: var(--red); letter-spacing: -0.03em; font-variant-numeric: tabular-nums;
 }
 
@@ -222,7 +222,7 @@ ul.plain li::before { content: '—'; color: var(--red); font-family: var(--body
   text-transform: uppercase; color: var(--paper-faint); margin: 0 0 6px;
 }
 .ov .ovsec {
-  font-family: var(--display); font-size: 15px; margin: 30px 0 14px;
+  font-family: var(--display); font-weight: 800; font-size: 15px; margin: 30px 0 14px;
   display: flex; align-items: center; gap: 12px; color: var(--c);
 }
 .ov .ovsec span {
@@ -237,7 +237,7 @@ ul.plain li::before { content: '—'; color: var(--red); font-family: var(--body
 .ovc:hover, .ovc:focus-visible { border-color: var(--c); background: var(--ink-3); }
 .ovc[data-on='true'] { border-color: var(--c); background: var(--ink-3); }
 .ovc .n { font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.2em; color: var(--c); margin-bottom: 7px; }
-.ovc .t { font-family: var(--display); font-size: 12.5px; line-height: 1.28; }
+.ovc .t { font-family: var(--display); font-weight: 800; font-size: 12.5px; line-height: 1.28; }
 
 /* ── SPEAKER NOTES ───────────────────────────────────────── */
 .notes {

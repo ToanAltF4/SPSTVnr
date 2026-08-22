@@ -27,7 +27,9 @@
   --pad: clamp(22px, 5vw, 96px);
   --nav-h: 62px;
 
-  --display: 'Archivo Black', 'Arial Black', system-ui, sans-serif;
+  --display: 'Archivo', 'Arial Black', system-ui, sans-serif;
+  /* Luu y: Archivo Black KHONG co bo ky tu tieng Viet.
+     Dung Archivo weight 800-900 — cung ho chu, co day du dau tieng Viet. */
   --body: 'Lora', Georgia, 'Times New Roman', serif;
   --mono: 'IBM Plex Mono', ui-monospace, 'Courier New', monospace;
 }
@@ -72,7 +74,7 @@ img { max-width: 100%; display: block; }
 .eyebrow.gold { color: var(--gold); }
 .eyebrow.plain::after { display: none; }
 
-h1, h2, h3 { font-family: var(--display); font-weight: 400; text-wrap: balance; }
+h1, h2, h3 { font-family: var(--display); font-weight: 800; text-wrap: balance; }
 h2 { font-size: clamp(30px, 4.6vw, 68px); line-height: 1.02; letter-spacing: -0.02em; margin: 0 0 26px; }
 h3 { font-size: clamp(18px, 1.7vw, 26px); line-height: 1.16; letter-spacing: -0.008em; margin: 0 0 12px; }
 p { margin: 0 0 18px; max-width: 66ch; color: #cfc9bb; }
@@ -256,7 +258,7 @@ em { color: var(--gold); font-style: italic; }
 /* ── PULL QUOTE ──────────────────────────────────────────── */
 .pull { padding: clamp(50px, 8vh, 100px) 0; text-align: center; }
 .pull p {
-  font-family: var(--display); font-size: clamp(24px, 4vw, 58px); line-height: 1.08;
+  font-family: var(--display); font-weight: 800; font-size: clamp(24px, 4vw, 58px); line-height: 1.08;
   letter-spacing: -0.018em; color: var(--paper); max-width: 22ch; margin: 0 auto;
 }
 .pull p .r { color: var(--red); }
@@ -265,7 +267,7 @@ em { color: var(--gold); font-style: italic; }
 
 /* ── SO LIEU ─────────────────────────────────────────────── */
 .stat .n {
-  font-family: var(--display); font-size: clamp(38px, 5.4vw, 86px); line-height: 0.88;
+  font-family: var(--display); font-weight: 900; font-size: clamp(38px, 5.4vw, 86px); line-height: 0.88;
   color: var(--red); letter-spacing: -0.03em; font-variant-numeric: tabular-nums;
 }
 .stat .n .u { font-size: 0.4em; color: var(--paper-dim); }
