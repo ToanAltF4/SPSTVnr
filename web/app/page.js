@@ -35,9 +35,10 @@ export default function Page() {
           </div>
 
           <h1>
-            Vĩ tuyến<span className="l2">17</span>
-            <span className="l3">Poster đã nói dối</span>
+            <span>Vĩ tuyến</span>
+            <span className="l2">17</span>
           </h1>
+          <p className="thesis">Poster đã nói dối</p>
 
           <div className="hero-sub">
             <p className="q">

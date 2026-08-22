@@ -93,11 +93,11 @@
 .eyebrow.gold { color: var(--gold); }
 
 .slide h1 {
-  font-family: var(--display); font-weight: 800; font-size: clamp(38px, 6.6vw, 104px); line-height: 0.94;
+  font-family: var(--display); font-weight: 800; font-size: clamp(38px, 6.6vw, 104px); line-height: 1.04;
   letter-spacing: -0.022em; margin: 0; text-wrap: balance;
 }
 .slide h2 {
-  font-family: var(--display); font-weight: 800; font-size: clamp(26px, 3.5vw, 54px); line-height: 1.04;
+  font-family: var(--display); font-weight: 800; font-size: clamp(26px, 3.5vw, 54px); line-height: 1.1;
   letter-spacing: -0.016em; margin: 0 0 22px; text-wrap: balance;
 }
 .slide h3 {
@@ -110,7 +110,7 @@
 .slide em { color: var(--gold); font-style: italic; }
 .dim { color: var(--paper-dim) !important; }
 .big-num {
-  font-family: var(--display); font-weight: 900; font-size: clamp(44px, 7vw, 104px); line-height: 0.9;
+  font-family: var(--display); font-weight: 900; font-size: clamp(44px, 7vw, 104px); line-height: 1.02;
   color: var(--red); letter-spacing: -0.03em; font-variant-numeric: tabular-nums;
 }
 
